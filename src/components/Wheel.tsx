@@ -7,7 +7,7 @@ import {
 } from 'react'
 import { Entry, SpinSpeed } from '../types'
 import { Template } from '../templates'
-import { textColorFor, shade } from '../palettes'
+import { shade } from '../palettes'
 import { tick as playTick } from '../audio'
 
 export interface WheelHandle {
@@ -150,19 +150,14 @@ export const Wheel = forwardRef<WheelHandle, WheelProps>(function Wheel(
       ctx.lineWidth = Math.max(1, size * 0.0035)
       ctx.stroke()
 
-      // Texto del segmento (una línea)
+      // Texto del segmento (una línea). Siempre en negro para legibilidad uniforme.
       const entry = entries[i]
-      const tcol = entry.color
-        ? textColorFor(entry.color)
-        : tp.dark
-          ? '#ffffff'
-          : textColorFor(base)
 
       ctx.save()
       ctx.translate(cx, cy)
       ctx.rotate(a0 + seg / 2)
       ctx.textAlign = 'right'
-      ctx.fillStyle = tcol
+      ctx.fillStyle = '#1a1a1a'
 
       const mainSize = Math.max(
         9,
@@ -175,8 +170,8 @@ export const Wheel = forwardRef<WheelHandle, WheelProps>(function Wheel(
 
       ctx.font = `600 ${mainSize}px "Albert Sans", sans-serif`
       ctx.textBaseline = 'middle'
-      ctx.shadowColor = tp.dark ? 'rgba(0,0,0,0.25)' : 'transparent'
-      ctx.shadowBlur = tp.dark ? 2 : 0
+      ctx.shadowColor = 'transparent'
+      ctx.shadowBlur = 0
       ctx.fillText(main, radius, 0)
       ctx.restore()
     }

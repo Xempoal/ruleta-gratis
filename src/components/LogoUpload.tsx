@@ -33,7 +33,7 @@ export function LogoUpload({ logo, setLogo }: LogoUploadProps) {
           {logo ? 'Cambiar logo' : 'Subir logo'}
         </button>
       </div>
-      <small className="logo-note">Se muestra al centro de la ruleta · solo en memoria, no se guarda.</small>
+      <small className="logo-note">Se muestra al centro de la ruleta.</small>
 
       <input
         ref={inputRef}

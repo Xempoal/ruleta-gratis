@@ -164,15 +164,11 @@ export default function App() {
 
       {sponsorEnabled && <SponsorBanner />}
 
-      <header className="topbar">
-        <div className="brand">
-          <span className="brand-text">Ruleta de Sorteos</span>
-        </div>
-        {socialEnabled && <ModeSwitcher mode={mode} onChange={setMode} />}
-        <div className="privacy-pill" title="Nada se guarda en servidores ni en tu dispositivo">
-          Sin registro · tus datos se borran al salir
-        </div>
-      </header>
+      {socialEnabled && (
+        <header className="topbar">
+          <ModeSwitcher mode={mode} onChange={setMode} />
+        </header>
+      )}
 
       {showSocial ? (
         <main className="layout social-layout">
@@ -182,8 +178,13 @@ export default function App() {
         <main className="layout">
           <section className="stage-wrap" ref={stageRef}>
             <div className="stage-head">
-              <h1 className="raffle-title">{settings.title || 'Tu sorteo'}</h1>
-              <button className="icon-btn ghost" onClick={toggleFullscreen} title="Pantalla completa">⛶</button>
+              <h1 className="raffle-title">{settings.title || 'Sorteo'}</h1>
+              <button
+                className="icon-btn fullscreen-btn"
+                onClick={toggleFullscreen}
+                title="Pantalla completa"
+                aria-label="Pantalla completa"
+              >⛶</button>
             </div>
 
             <div className="wheel-area">
@@ -250,7 +251,6 @@ export default function App() {
             />
             <SettingsPanel settings={settings} patch={actions.patchSettings} disabled={busy} />
             <LogoUpload logo={settings.logo} setLogo={(l) => actions.patchSettings({ logo: l })} />
-            <p className="footnote">Hecho para proyectar y sorprender · 100% en tu navegador.</p>
           </aside>
         </main>
       )}

@@ -17,9 +17,9 @@ const DEFAULT_ENTRIES: Entry[] = [
 ].map((label) => ({ id: uid(), label }))
 
 const DEFAULT_SETTINGS: Settings = {
-  title: 'Ruleta de Sorteos',
-  templateId: 'A',
-  paletteId: 'pastel',
+  title: '',
+  templateId: 'B',
+  paletteId: 'vivo',
   customColors: null,
   numWinners: 1,
   removeWinners: false,
@@ -128,7 +128,7 @@ function reducer(state: RaffleState, action: Action): RaffleState {
       return {
         entries: [],
         pool: [],
-        settings: { ...state.settings, title: 'Ruleta de Sorteos', logo: null },
+        settings: { ...state.settings, title: '', logo: null },
         winners: [],
         finished: false,
       }
