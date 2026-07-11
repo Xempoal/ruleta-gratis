@@ -11,6 +11,8 @@ import { Decorations } from './components/Decorations'
 import { SponsorBanner } from './components/SponsorBanner'
 import { ModeSwitcher, AppMode } from './components/ModeSwitcher'
 import { SocialRaffle } from './components/social/SocialRaffle'
+import { JoinPage } from './components/live/JoinPage'
+import { LivePanel } from './components/live/LivePanel'
 import { getTemplate } from './templates'
 import { getPalette, textColorFor } from './palettes'
 import { isEnabled } from './config/features'
@@ -18,6 +20,12 @@ import { Entry } from './types'
 import { setMuted, beep, fanfare } from './audio'
 
 type Phase = 'idle' | 'counting' | 'spinning' | 'revealed' | 'done'
+
+/** #/s/mi-sorteo → "mi-sorteo" (página de registro de participantes) */
+function joinSlugFromHash(): string | null {
+  const m = window.location.hash.match(/^#\/s\/([a-z0-9-]{2,40})\/?$/i)
+  return m ? m[1].toLowerCase() : null
+}
 
 export default function App() {
   const { state, actions } = useRaffle()
@@ -34,6 +42,13 @@ export default function App() {
   const socialEnabled = isEnabled('socialRaffle')
   const sponsorEnabled = isEnabled('sponsorBanner')
   const [mode, setMode] = useState<AppMode>('wheel')
+
+  const [joinSlug, setJoinSlug] = useState<string | null>(() => joinSlugFromHash())
+  useEffect(() => {
+    const onHash = () => setJoinSlug(joinSlugFromHash())
+    window.addEventListener('hashchange', onHash)
+    return () => window.removeEventListener('hashchange', onHash)
+  }, [])
 
   const wheelRef = useRef<WheelHandle>(null)
   const [phase, setPhase] = useState<Phase>('idle')
@@ -149,6 +164,21 @@ export default function App() {
   const accentText = textColorFor(accent)
   const showSocial = socialEnabled && mode === 'social'
 
+  // Página de registro para participantes (link compartido #/s/…)
+  if (joinSlug) {
+    return (
+      <div
+        className="app"
+        data-template={settings.templateId}
+        style={{ ['--accent' as string]: accent, ['--accent-text' as string]: accentText }}
+      >
+        <div className="bg-soft" aria-hidden="true" />
+        <Decorations template={template.id} />
+        <JoinPage slug={joinSlug} />
+      </div>
+    )
+  }
+
   return (
     <div
       className="app"
@@ -157,6 +187,10 @@ export default function App() {
     >
       <div className="bg-soft" aria-hidden="true" />
       <Decorations template={template.id} />
+
+      <div className="notice-bar" role="note">
+        ✨ Próximamente: sorteos de comentarios en Instagram, TikTok y Facebook
+      </div>
 
       {sponsorEnabled && <SponsorBanner />}
 
@@ -258,6 +292,7 @@ export default function App() {
               sortAlpha={actions.sortAlpha}
               disabled={busy}
             />
+            <LivePanel setEntries={actions.setEntries} disabled={busy} />
             <SettingsPanel settings={settings} patch={actions.patchSettings} disabled={busy} />
             <LogoUpload logo={settings.logo} setLogo={(l) => actions.patchSettings({ logo: l })} />
           </aside>

@@ -1,5 +1,22 @@
 # 🚀 Publicar la Ruleta en Cloudflare Pages
 
+## 🗄️ Base de datos de los "sorteos con link" (hacer UNA vez)
+
+El módulo de sorteos con registro por link necesita una base D1 de Cloudflare
+(gratis). Sin esto, el resto del sitio funciona igual; solo ese módulo dirá
+"no está configurado todavía".
+
+1. En **dash.cloudflare.com** → menú izquierdo **Almacenamiento y bases de datos**
+   (Storage & Databases) → **D1 SQL Database** → **Create database**.
+   Nombre: `ruleta-db` → **Create**.
+2. Ve a tu proyecto de Pages (**ruleta-gratis**) → **Settings** → **Bindings**
+   (o *Functions → D1 database bindings*) → **Add** → **D1 database**:
+   - **Variable name:** `DB`  ← exactamente así, en mayúsculas
+   - **D1 database:** `ruleta-db`
+3. Guarda y vuelve a desplegar (Deployments → Retry deployment, o espera al
+   siguiente push). Las tablas se crean solas en el primer uso.
+
+
 La app es un sitio **estático** (solo archivos), así que Cloudflare lo sirve
 gratis desde su CDN global y aguanta miles de personas a la vez.
 

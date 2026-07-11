@@ -9,18 +9,10 @@ createRoot(document.getElementById('root')!).render(
   </StrictMode>,
 )
 
-// PWA desactivada: el sitio ya NO se puede instalar ni funciona sin conexión.
-// Limpiamos cualquier service worker y caché que hubieran quedado de versiones
-// anteriores para que los visitantes que ya lo tenían vuelvan a la web normal.
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker
-    .getRegistrations()
-    .then((regs) => regs.forEach((r) => r.unregister()))
-    .catch(() => {})
-}
-if (typeof caches !== 'undefined') {
-  caches
-    .keys()
-    .then((keys) => keys.forEach((k) => caches.delete(k)))
-    .catch(() => {})
+// PWA: el sitio se puede instalar y funciona sin conexión (ver public/sw.js).
+// Solo en producción; en desarrollo el service worker estorba con Vite.
+if ('serviceWorker' in navigator && !import.meta.env.DEV) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {})
+  })
 }

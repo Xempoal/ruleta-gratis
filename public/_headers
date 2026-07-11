@@ -1,14 +1,23 @@
-# Cabeceras para Cloudflare Pages
+# Cabeceras de seguridad para Cloudflare Pages
 /*
   X-Frame-Options: SAMEORIGIN
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: geolocation=(), camera=(), microphone=()
+  Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=(), usb=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Cross-Origin-Opener-Policy: same-origin
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'
 
 # Los assets con hash pueden cachearse de forma agresiva
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
-# El service worker debe revalidarse siempre para recibir actualizaciones
+# El service worker y el manifest deben revalidarse siempre
 /sw.js
   Cache-Control: no-cache
+/manifest.webmanifest
+  Cache-Control: no-cache
+
+# Las respuestas de la API nunca se cachean
+/api/*
+  Cache-Control: no-store

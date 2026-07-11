@@ -4,8 +4,8 @@
   "description": "Crea sorteos espectaculares al instante. Sin registro y sin guardar datos.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#161a21",
-  "theme_color": "#161a21",
+  "background_color": "#fdf2fa",
+  "theme_color": "#ec4899",
   "lang": "es",
   "icons": [
     {
