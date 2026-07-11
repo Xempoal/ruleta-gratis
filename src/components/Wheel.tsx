@@ -296,6 +296,9 @@ function drawRing(
     case 'wood':
       drawRingWood(ctx, cx, cy, R, tp)
       break
+    case 'plain':
+      drawRingPlain(ctx, cx, cy, R, tp)
+      break
     case 'pearlsBold':
       drawRingPearls(ctx, cx, cy, R, tp, rotation, n, true)
       break
@@ -349,6 +352,26 @@ function drawRingPearls(
       ctx.fill()
     }
   }
+}
+
+function drawRingPlain(
+  ctx: CanvasRenderingContext2D,
+  cx: number,
+  cy: number,
+  R: number,
+  tp: Template,
+) {
+  const size = R * 2
+  // Banda gruesa lisa (borde blanco estilo moderno)
+  ctx.save()
+  ctx.beginPath()
+  ctx.arc(cx, cy, R, 0, TWO_PI)
+  ctx.strokeStyle = tp.ringColor
+  ctx.lineWidth = Math.max(6, size * 0.045)
+  ctx.shadowColor = 'rgba(40,40,60,0.14)'
+  ctx.shadowBlur = size * 0.02
+  ctx.stroke()
+  ctx.restore()
 }
 
 function drawRingTicks(
@@ -434,6 +457,9 @@ function drawPointer(
       break
     case 'arrow':
       drawPointerArrow(ctx, cx, cy, R, tp)
+      break
+    case 'peg':
+      drawPointerPeg(ctx, cx, cy, R, tp)
       break
     default:
       drawPointerDrop(ctx, cx, cy, R, tp)
@@ -559,6 +585,43 @@ function drawPointerArrow(
   ctx.restore()
 }
 
+function drawPointerPeg(
+  ctx: CanvasRenderingContext2D,
+  cx: number,
+  cy: number,
+  R: number,
+  tp: Template,
+) {
+  // Pinza/taquito de cartón: rectángulo redondeado que asoma sobre el aro
+  const w = R * 0.052
+  const topY = cy - R - R * 0.085
+  const botY = cy - R + R * 0.055
+  const r = w * 0.5
+  ctx.save()
+  ctx.beginPath()
+  ctx.moveTo(cx - w + r, topY)
+  ctx.arcTo(cx + w, topY, cx + w, botY, r)
+  ctx.arcTo(cx + w, botY, cx - w, botY, r)
+  ctx.arcTo(cx - w, botY, cx - w, topY, r)
+  ctx.arcTo(cx - w, topY, cx + w, topY, r)
+  ctx.closePath()
+  ctx.fillStyle = tp.pointerColor
+  ctx.shadowColor = 'rgba(60,45,25,0.35)'
+  ctx.shadowBlur = R * 0.02
+  ctx.shadowOffsetY = R * 0.006
+  ctx.fill()
+  ctx.shadowBlur = 0
+  ctx.strokeStyle = shade(tp.pointerColor, -0.25)
+  ctx.lineWidth = Math.max(1, R * 0.004)
+  ctx.stroke()
+  // Ranura central
+  ctx.beginPath()
+  ctx.arc(cx, topY + (botY - topY) * 0.32, w * 0.28, 0, TWO_PI)
+  ctx.fillStyle = shade(tp.pointerColor, -0.35)
+  ctx.fill()
+  ctx.restore()
+}
+
 /* ---------- CENTRO (según template.hubStyle) ---------- */
 
 function drawHub(
@@ -609,6 +672,12 @@ function drawHub(
       break
     case 'star':
       drawHubStar(ctx, cx, cy, hubR, tp)
+      break
+    case 'gift':
+      drawHubGift(ctx, cx, cy, hubR, tp)
+      break
+    case 'smile':
+      drawHubSmile(ctx, cx, cy, hubR, tp)
       break
     default:
       drawHubArrow(ctx, cx, cy, hubR, R, tp)
@@ -696,6 +765,71 @@ function drawHubSpiral(
     if (i === 0) ctx.moveTo(x, y)
     else ctx.lineTo(x, y)
   }
+  ctx.stroke()
+}
+
+function drawHubGift(
+  ctx: CanvasRenderingContext2D,
+  cx: number,
+  cy: number,
+  hubR: number,
+  tp: Template,
+) {
+  const s = hubR * 1.1 // ancho de la caja
+  const lw = Math.max(2, hubR * 0.11)
+  ctx.strokeStyle = tp.hubIconColor
+  ctx.lineWidth = lw
+  ctx.lineJoin = 'round'
+  ctx.lineCap = 'round'
+  const boxTop = cy - s * 0.18
+  const boxBot = cy + s * 0.52
+  const lidTop = boxTop - s * 0.2
+  // Caja
+  ctx.strokeRect(cx - s * 0.38, boxTop, s * 0.76, boxBot - boxTop)
+  // Tapa
+  ctx.strokeRect(cx - s * 0.46, lidTop, s * 0.92, s * 0.2)
+  // Cinta vertical
+  ctx.beginPath()
+  ctx.moveTo(cx, lidTop)
+  ctx.lineTo(cx, boxBot)
+  ctx.stroke()
+  // Moño (dos bucles)
+  const bowR = s * 0.16
+  ctx.beginPath()
+  ctx.arc(cx - bowR, lidTop - bowR * 0.8, bowR, Math.PI * 0.25, Math.PI * 1.65)
+  ctx.stroke()
+  ctx.beginPath()
+  ctx.arc(cx + bowR, lidTop - bowR * 0.8, bowR, Math.PI * 1.35, Math.PI * 0.75)
+  ctx.stroke()
+}
+
+function drawHubSmile(
+  ctx: CanvasRenderingContext2D,
+  cx: number,
+  cy: number,
+  hubR: number,
+  tp: Template,
+) {
+  const lw = Math.max(2, hubR * 0.1)
+  ctx.strokeStyle = tp.hubIconColor
+  ctx.fillStyle = tp.hubIconColor
+  ctx.lineWidth = lw
+  ctx.lineCap = 'round'
+  // Contorno de la carita
+  ctx.beginPath()
+  ctx.arc(cx, cy, hubR * 0.62, 0, TWO_PI)
+  ctx.stroke()
+  // Ojos
+  const eyeR = hubR * 0.075
+  ctx.beginPath()
+  ctx.arc(cx - hubR * 0.24, cy - hubR * 0.14, eyeR, 0, TWO_PI)
+  ctx.fill()
+  ctx.beginPath()
+  ctx.arc(cx + hubR * 0.24, cy - hubR * 0.14, eyeR, 0, TWO_PI)
+  ctx.fill()
+  // Sonrisa
+  ctx.beginPath()
+  ctx.arc(cx, cy + hubR * 0.05, hubR * 0.32, Math.PI * 0.18, Math.PI * 0.82)
   ctx.stroke()
 }
 

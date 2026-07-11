@@ -4,9 +4,56 @@ import { TemplateId } from '../templates'
 // Decoración de fondo del escenario según la plantilla:
 //  B → nubes y arbustos estilo plastilina
 //  D → confeti de colores
+//  E → puntitos y burbuja azul suave
+//  F → destellos y chispas candy
+//  G → ramitas y manchas de papel kraft
 // Es puramente decorativo (aria-hidden) y se posiciona absoluto detrás del contenido.
 export function Decorations({ template }: { template: TemplateId }) {
-  return template === 'D' ? <DecoD /> : <DecoB />
+  switch (template) {
+    case 'D':
+      return <DecoD />
+    case 'E':
+      return <DecoE />
+    case 'F':
+      return <DecoF />
+    case 'G':
+      return <DecoG />
+    default:
+      return <DecoB />
+  }
+}
+
+function DecoE() {
+  return (
+    <div className="deco deco-e" aria-hidden="true">
+      <span className="deco-dots-e" />
+      <span className="deco-blob-e" />
+    </div>
+  )
+}
+
+function DecoF() {
+  return (
+    <div className="deco deco-f" aria-hidden="true">
+      <span className="spark spark-1" />
+      <span className="spark spark-2" />
+      <span className="spark spark-3" />
+      <span className="spark spark-4" />
+      <span className="deco-blob-f-tl" />
+      <span className="deco-blob-f-br" />
+    </div>
+  )
+}
+
+function DecoG() {
+  return (
+    <div className="deco deco-g" aria-hidden="true">
+      <span className="sprig sprig-l" />
+      <span className="sprig sprig-r" />
+      <span className="paper-stain paper-stain-tr" />
+      <span className="paper-stain paper-stain-bl" />
+    </div>
+  )
 }
 
 function DecoB() {

@@ -52,6 +52,21 @@ export const PALETTES: Palette[] = [
     colors: ['#f1e3e3', '#e7cdd2', '#d8aeb8', '#c08e9d', '#9c6878', '#7a4e5e', '#e9d3d8', '#dcbfc6'],
   },
   {
+    id: 'nube',
+    name: 'Nube',
+    colors: ['#bcd8f7', '#d4c8f2', '#f7e6a8', '#f6c6d4', '#c3ecd2', '#f8d9b0', '#c9d7f2', '#e8d1ef'],
+  },
+  {
+    id: 'candy',
+    name: 'Candy',
+    colors: ['#4dd6c4', '#b07ce8', '#f9a64a', '#f472b6', '#fb7185', '#f5c53e', '#8b8bf0', '#43c6ac'],
+  },
+  {
+    id: 'kraft',
+    name: 'Kraft',
+    colors: ['#a9bb97', '#e2a78d', '#d8c59b', '#c8aa9e', '#b6c2a2', '#ddc19b', '#98ab88', '#d8a888'],
+  },
+  {
     id: 'noche',
     name: 'Noche',
     colors: ['#262b35', '#333a47', '#414a5a', '#2d333e', '#4a5366', '#383f4d', '#222730', '#444d5e'],

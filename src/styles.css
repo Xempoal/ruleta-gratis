@@ -912,7 +912,10 @@ input[type='range']::-moz-range-thumb {
 /* ===================================================================
    PLANTILLAS (skins de página) — data-template en .app
    =================================================================== */
-:root { --font-round: 'Baloo 2', 'Albert Sans', sans-serif; }
+:root {
+  --font-round: 'Baloo 2', 'Albert Sans', sans-serif;
+  --font-hand: 'Caveat', 'Segoe Script', cursive;
+}
 
 /* ---- B · Divertido 3D / Plastilina ---- */
 .app[data-template='B'] { --bg: #fbf2e1; --bg-2: #f3e6cf; }
@@ -966,6 +969,90 @@ input[type='range']::-moz-range-thumb {
 .app[data-template='D'] .hint-line,
 .app[data-template='D'] .text-btn { color: rgba(255, 255, 255, 0.85); }
 
+/* ---- E · Moderno / Azul limpio ---- */
+.app[data-template='E'] { --bg: #f7f9fd; --bg-2: #edf2fb; }
+.app[data-template='E'] .raffle-title {
+  font-family: var(--font-body);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--accent);
+}
+.app[data-template='E'] .panel,
+.app[data-template='E'] .social-card { border-radius: 18px; }
+.app[data-template='E'] .spin-btn {
+  border-radius: 999px;
+  background: linear-gradient(135deg, #3f8bff, #2563eb);
+  box-shadow: 0 14px 30px -14px rgba(37, 99, 235, 0.65);
+}
+
+/* ---- F · Candy / Degradado rosa ---- */
+.app[data-template='F'] { --bg: #fdf2fa; --bg-2: #f7e9fb; }
+.app[data-template='F'] .bg-soft {
+  background:
+    radial-gradient(55% 45% at 85% 5%, rgba(251, 146, 60, 0.22), transparent 70%),
+    radial-gradient(60% 50% at 5% 30%, rgba(192, 38, 211, 0.16), transparent 70%),
+    radial-gradient(70% 55% at 50% 110%, rgba(236, 72, 153, 0.24), transparent 70%),
+    linear-gradient(165deg, #fdeef8, #f3e7fc);
+}
+.app[data-template='F'] .raffle-title {
+  font-family: var(--font-round);
+  font-weight: 800;
+  background: linear-gradient(100deg, #ec4899, #a855f7, #fb923c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.app[data-template='F'] .panel,
+.app[data-template='F'] .social-card { border-radius: 24px; }
+.app[data-template='F'] .spin-btn {
+  font-family: var(--font-round);
+  border-radius: 999px;
+  background: linear-gradient(100deg, #ec4899, #f97316);
+  box-shadow: 0 16px 34px -14px rgba(236, 72, 153, 0.7);
+}
+.app[data-template='F'] .text-btn { color: #d1489d; }
+
+/* ---- G · Papel / Kraft artesanal ---- */
+.app[data-template='G'] {
+  --bg: #f4ecd9;
+  --bg-2: #ede2c8;
+  --surface: #fbf6e8;
+  --surface-2: #f6efdc;
+  --border: rgba(90, 72, 44, 0.16);
+  --border-strong: rgba(90, 72, 44, 0.3);
+  --text: #45392a;
+  --text-dim: #7d6e56;
+  --shadow: 0 20px 44px -26px rgba(90, 70, 40, 0.45);
+}
+.app[data-template='G'] .bg-soft {
+  background:
+    radial-gradient(rgba(120, 95, 55, 0.045) 1.4px, transparent 1.8px),
+    linear-gradient(var(--bg), var(--bg-2));
+  background-size: 22px 22px, auto;
+}
+.app[data-template='G'] .raffle-title {
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: clamp(38px, 5.4vw, 60px);
+  color: #5d4c32;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 8px;
+  text-decoration-color: #b98d5f;
+}
+.app[data-template='G'] .panel,
+.app[data-template='G'] .social-card {
+  border-radius: 12px;
+  border: 1px solid #ddcda8;
+}
+.app[data-template='G'] .spin-btn {
+  border-radius: 999px;
+  background: #6f7f5a;
+  color: #f5f1e3;
+  box-shadow: 0 12px 26px -12px rgba(90, 100, 70, 0.7);
+}
+.app[data-template='G'] .hint-line { color: #8a7a5e; }
+
 /* ===================================================================
    DECORACIONES de fondo (Decorations.tsx)
    =================================================================== */
@@ -1005,6 +1092,62 @@ input[type='range']::-moz-range-thumb {
 .deco-blob-br-pink {
   bottom: -90px; right: -70px; width: 320px; height: 320px; border-radius: 50%;
   background: radial-gradient(circle at 40% 40%, rgba(243, 148, 184, 0.75), transparent 70%);
+}
+/* E */
+.deco-dots-e {
+  top: 96px; left: 30px; width: 130px; height: 96px;
+  background-image: radial-gradient(rgba(37, 99, 235, 0.28) 2px, transparent 2.5px);
+  background-size: 18px 18px;
+}
+.deco-blob-e {
+  bottom: -90px; right: -80px; width: 340px; height: 340px; border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, rgba(120, 175, 255, 0.4), transparent 70%);
+}
+/* F — chispas candy */
+.deco-f .spark { width: 0; height: 0; }
+.deco-f .spark::before {
+  content: '✦';
+  position: absolute;
+  font-size: 26px;
+  line-height: 1;
+}
+.spark-1 { top: 110px; left: 6%; }
+.spark-1::before { color: #f472b6; transform: rotate(-14deg); }
+.spark-2 { top: 170px; right: 8%; }
+.spark-2::before { color: #a855f7; font-size: 20px; transform: rotate(20deg); }
+.spark-3 { bottom: 180px; left: 10%; }
+.spark-3::before { color: #fb923c; font-size: 18px; transform: rotate(8deg); }
+.spark-4 { bottom: 110px; right: 12%; }
+.spark-4::before { color: #ec4899; font-size: 30px; transform: rotate(-24deg); }
+.deco-blob-f-tl {
+  top: -100px; left: -90px; width: 340px; height: 340px; border-radius: 50%;
+  background: radial-gradient(circle at 55% 55%, rgba(216, 132, 235, 0.35), transparent 70%);
+}
+.deco-blob-f-br {
+  bottom: -110px; right: -80px; width: 360px; height: 360px; border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, rgba(251, 146, 60, 0.28), transparent 70%);
+}
+/* G — ramitas y manchas de papel */
+.deco-g .sprig { width: 0; height: 0; }
+.deco-g .sprig::before {
+  content: '❦';
+  position: absolute;
+  font-size: 34px;
+  line-height: 1;
+  color: rgba(111, 127, 90, 0.55);
+}
+.sprig-l { bottom: 60px; left: 4%; }
+.sprig-l::before { transform: rotate(-18deg); }
+.sprig-r { bottom: 60px; right: 4%; }
+.sprig-r::before { transform: rotate(18deg) scaleX(-1); }
+.paper-stain { border-radius: 50%; }
+.paper-stain-tr {
+  top: -70px; right: -60px; width: 260px; height: 260px;
+  background: radial-gradient(circle at 45% 45%, rgba(185, 141, 95, 0.18), transparent 70%);
+}
+.paper-stain-bl {
+  bottom: -80px; left: -70px; width: 300px; height: 300px;
+  background: radial-gradient(circle at 50% 50%, rgba(154, 140, 100, 0.16), transparent 70%);
 }
 
 /* ===================================================================
