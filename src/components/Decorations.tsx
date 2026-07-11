@@ -2,31 +2,11 @@ import { useMemo } from 'react'
 import { TemplateId } from '../templates'
 
 // Decoración de fondo del escenario según la plantilla:
-//  A → esquina suave azul + puntitos
 //  B → nubes y arbustos estilo plastilina
-//  C → esquina negra con trama de puntos
 //  D → confeti de colores
 // Es puramente decorativo (aria-hidden) y se posiciona absoluto detrás del contenido.
 export function Decorations({ template }: { template: TemplateId }) {
-  switch (template) {
-    case 'B':
-      return <DecoB />
-    case 'C':
-      return <DecoC />
-    case 'D':
-      return <DecoD />
-    default:
-      return <DecoA />
-  }
-}
-
-function DecoA() {
-  return (
-    <div className="deco deco-a" aria-hidden="true">
-      <span className="deco-dots deco-dots-tl" />
-      <span className="deco-blob deco-blob-bl" />
-    </div>
-  )
+  return template === 'D' ? <DecoD /> : <DecoB />
 }
 
 function DecoB() {
@@ -36,16 +16,6 @@ function DecoB() {
       <span className="cloud cloud-2" />
       <span className="bush bush-l" />
       <span className="bush bush-r" />
-    </div>
-  )
-}
-
-function DecoC() {
-  return (
-    <div className="deco deco-c" aria-hidden="true">
-      <span className="deco-wave" />
-      <span className="deco-corner deco-corner-br" />
-      <span className="deco-grid deco-grid-br" />
     </div>
   )
 }

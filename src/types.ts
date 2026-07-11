@@ -16,7 +16,7 @@ export type SpinSpeed = 'rapido' | 'normal' | 'dramatico'
 
 export interface Settings {
   title: string
-  /** Plantilla (skin completo) elegida: A | B | C | D */
+  /** Plantilla (skin completo) elegida: B | D */
   templateId: string
   /** Paleta de colores de los segmentos */
   paletteId: string
@@ -30,8 +30,6 @@ export interface Settings {
   countdown: boolean
   /** dataURL del logo subido — vive solo en memoria */
   logo: string | null
-  /** Modo oscuro elegante (por defecto claro) */
-  darkMode: boolean
 }
 
 export const MAX_ENTRIES = 100

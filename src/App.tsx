@@ -58,10 +58,6 @@ export default function App() {
 
   useEffect(() => setMuted(!settings.soundOn), [settings.soundOn])
 
-  useEffect(() => {
-    document.documentElement.dataset.theme = settings.darkMode ? 'dark' : 'light'
-  }, [settings.darkMode])
-
   const doSpin = useCallback(() => {
     setPhase('spinning')
     wheelRef.current?.spin()
@@ -238,6 +234,19 @@ export default function App() {
                 onNewDraw={clearAll}
               />
             )}
+
+            {/* Dentro del escenario para que se vean también en pantalla completa */}
+            <WinnerModal
+              winner={modal?.entry ?? null}
+              rank={modalRank}
+              totalWinners={totalPlanned}
+              accent={accent}
+              hasMore={hasMore}
+              onClose={closeModal}
+              onContinue={continueDraw}
+              onSpinAgain={resetAndSpin}
+            />
+            <Confetti burst={confettiBurst} colors={colors} />
           </section>
 
           <aside className="sidebar">
@@ -261,18 +270,6 @@ export default function App() {
         </a>
       </footer>
 
-      <WinnerModal
-        winner={modal?.entry ?? null}
-        rank={modalRank}
-        totalWinners={totalPlanned}
-        accent={accent}
-        hasMore={hasMore}
-        onClose={closeModal}
-        onContinue={continueDraw}
-        onSpinAgain={resetAndSpin}
-      />
-
-      <Confetti burst={confettiBurst} colors={colors} />
     </div>
   )
 }

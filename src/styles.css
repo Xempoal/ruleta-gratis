@@ -24,22 +24,6 @@
   --font-body: 'Albert Sans', system-ui, sans-serif;
 }
 
-:root[data-theme='dark'] {
-  --bg: #181b21;
-  --bg-2: #14161b;
-  --surface: #23262e;
-  --surface-2: #1e2128;
-  --border: rgba(255, 255, 255, 0.09);
-  --border-strong: rgba(255, 255, 255, 0.17);
-  --text: #ece8e1;
-  --text-dim: #a8a39a;
-  --text-faint: #767068;
-  --cta-bg: #ece8e1;
-  --cta-text: #1a1d23;
-  --shadow: 0 22px 50px -28px rgba(0, 0, 0, 0.65);
-  --shadow-sm: 0 4px 16px -8px rgba(0, 0, 0, 0.5);
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -930,18 +914,6 @@ input[type='range']::-moz-range-thumb {
    =================================================================== */
 :root { --font-round: 'Baloo 2', 'Albert Sans', sans-serif; }
 
-/* ---- A · Limpio / Azul ---- */
-.app[data-template='A'] { --bg: #fbfcfe; --bg-2: #eef3fb; }
-.app[data-template='A'] .raffle-title {
-  font-family: var(--font-body);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  color: var(--accent);
-}
-.app[data-template='A'] .spin-btn {
-  background: linear-gradient(135deg, #3f8bff, #2563eb);
-}
-
 /* ---- B · Divertido 3D / Plastilina ---- */
 .app[data-template='B'] { --bg: #fbf2e1; --bg-2: #f3e6cf; }
 .app[data-template='B'] .raffle-title {
@@ -961,16 +933,6 @@ input[type='range']::-moz-range-thumb {
   transform: translateY(5px);
   box-shadow: 0 4px 0 -1px #0e8a80, 0 12px 20px -14px rgba(14, 138, 128, 0.7);
 }
-
-/* ---- C · Editorial blanco y negro ---- */
-.app[data-template='C'] { --bg: #ffffff; --bg-2: #f4f4f4; --accent: #161616; }
-.app[data-template='C'] .bg-soft { background: linear-gradient(var(--bg), var(--bg-2)); }
-.app[data-template='C'] .raffle-title {
-  font-family: var(--font-display);
-  font-weight: 600;
-  color: #141414;
-}
-.app[data-template='C'] .spin-btn { background: #161616; border-radius: 16px; }
 
 /* ---- D · Fiesta / Morado ---- */
 .app[data-template='D'] { --bg: #b9a4ec; --bg-2: #9f86e6; }
@@ -1016,16 +978,6 @@ input[type='range']::-moz-range-thumb {
 }
 .deco span { position: absolute; display: block; }
 
-/* A */
-.deco-dots-tl {
-  top: 92px; left: 26px; width: 120px; height: 90px;
-  background-image: radial-gradient(rgba(47, 123, 245, 0.35) 2px, transparent 2.5px);
-  background-size: 18px 18px;
-}
-.deco-blob-bl {
-  bottom: -80px; left: -70px; width: 320px; height: 320px; border-radius: 50%;
-  background: radial-gradient(circle at 40% 40%, rgba(120, 175, 255, 0.45), transparent 70%);
-}
 /* B */
 .deco-b .cloud {
   background: #ffffff; border-radius: 999px; opacity: 0.85;
@@ -1045,23 +997,6 @@ input[type='range']::-moz-range-thumb {
 }
 .bush-l { left: -20px; }
 .bush-r { right: -20px; transform: scaleX(-1); }
-/* C */
-.deco-corner-br {
-  bottom: -60px; right: -60px; width: 220px; height: 220px; border-radius: 50%;
-  background: #141414;
-}
-.deco-grid-br {
-  bottom: 26px; right: 150px; width: 90px; height: 70px;
-  background-image: radial-gradient(rgba(20, 20, 20, 0.5) 1.6px, transparent 2px);
-  background-size: 14px 14px;
-}
-.deco-wave {
-  top: 100px; right: 24px; width: 70px; height: 40px;
-  background:
-    radial-gradient(circle at 10px 20px, transparent 8px, #141414 9px, #141414 10px, transparent 11px),
-    radial-gradient(circle at 30px 20px, transparent 8px, #141414 9px, #141414 10px, transparent 11px);
-  opacity: 0.55;
-}
 /* D */
 .deco-d .confetti-bit {
   width: 10px; height: 10px; border-radius: 2px; opacity: 0.9;

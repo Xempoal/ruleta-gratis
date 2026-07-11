@@ -41,6 +41,13 @@ function easeOut(t: number): number {
   return 1 - Math.pow(1 - t, 5)
 }
 
+// Aleatorio uniforme en [0, 1) con crypto (mejor calidad que Math.random)
+function rand(): number {
+  const buf = new Uint32Array(1)
+  crypto.getRandomValues(buf)
+  return buf[0] / 4294967296
+}
+
 export const Wheel = forwardRef<WheelHandle, WheelProps>(function Wheel(
   { pool, template, colors, logo, spinSpeed, soundOn, onRequestSpin, onSpinEnd },
   ref,
@@ -243,8 +250,8 @@ export const Wheel = forwardRef<WheelHandle, WheelProps>(function Wheel(
 
     const seg = TWO_PI / n
     const { dur, spins } = SPEED_CONFIG[speedRef.current]
-    const winnerIdx = Math.floor(Math.random() * n)
-    const jitter = (Math.random() - 0.5) * seg * 0.7
+    const winnerIdx = Math.floor(rand() * n)
+    const jitter = (rand() - 0.5) * seg * 0.7
     const targetCenter = (winnerIdx + 0.5) * seg
     const current = rotationRef.current
     let final = POINTER_ANGLE - targetCenter + jitter

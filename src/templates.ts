@@ -1,11 +1,11 @@
-// Plantillas (skins completos) que el cliente elige: A, B, C, D.
+// Plantillas (skins completos) que el cliente elige: B (Divertido 3D) y D (Fiesta).
 // Cada plantilla define el "skin" de la rueda (estilo de aro, puntero y centro
 // + sus colores) y su acento de interfaz. El resto del chrome de la página
 // (fondo, botón, decoración, tipografía del título) se aplica por CSS con el
 // atributo data-template en .app — ver styles.css y Decorations.tsx.
 // Los colores de los SEGMENTOS los aporta la paleta (palettes.ts), no la plantilla.
 
-export type TemplateId = 'A' | 'B' | 'C' | 'D'
+export type TemplateId = 'B' | 'D'
 
 export type RingStyle = 'pearls' | 'pearlsBold' | 'ticks' | 'wood'
 export type PointerStyle = 'pin' | 'drop' | 'triangle' | 'arrow'
@@ -41,21 +41,6 @@ export interface Template {
 
 export const TEMPLATES: Template[] = [
   {
-    id: 'A',
-    name: 'Limpio',
-    tagline: 'Claro y minimal, acento azul',
-    defaultPaletteId: 'pastel',
-    accent: '#2f7bf5',
-    divider: '#ffffff',
-    ringStyle: 'pearls',
-    ringColor: '#e7ebf2',
-    pointerStyle: 'pin',
-    pointerColor: '#e3463f',
-    hubStyle: 'arrow',
-    hubColor: '#161a21',
-    hubIconColor: '#ffffff',
-  },
-  {
     id: 'B',
     name: 'Divertido 3D',
     tagline: 'Estilo plastilina, cálido',
@@ -68,21 +53,6 @@ export const TEMPLATES: Template[] = [
     pointerColor: '#ef6c2e',
     hubStyle: 'spiral',
     hubColor: '#ef6c2e',
-    hubIconColor: '#ffffff',
-  },
-  {
-    id: 'C',
-    name: 'Editorial',
-    tagline: 'Blanco y negro, elegante',
-    defaultPaletteId: 'pastel',
-    accent: '#161616',
-    divider: '#ffffff',
-    ringStyle: 'ticks',
-    ringColor: '#161616',
-    pointerStyle: 'triangle',
-    pointerColor: '#161616',
-    hubStyle: 'refresh',
-    hubColor: '#161616',
     hubIconColor: '#ffffff',
   },
   {

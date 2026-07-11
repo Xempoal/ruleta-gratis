@@ -27,7 +27,6 @@ const DEFAULT_SETTINGS: Settings = {
   soundOn: true,
   countdown: false,
   logo: null,
-  darkMode: false,
 }
 
 function initialState(): RaffleState {

@@ -185,12 +185,6 @@ export function SettingsPanel({ settings, patch, disabled }: SettingsPanelProps)
         checked={settings.soundOn}
         onChange={(v) => patch({ soundOn: v })}
       />
-      <Toggle
-        label="Modo oscuro"
-        hint="Interfaz en tono noche."
-        checked={settings.darkMode}
-        onChange={(v) => patch({ darkMode: v })}
-      />
     </section>
   )
 }
