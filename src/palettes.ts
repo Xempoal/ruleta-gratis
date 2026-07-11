@@ -66,11 +66,6 @@ export const PALETTES: Palette[] = [
     name: 'Kraft',
     colors: ['#a9bb97', '#e2a78d', '#d8c59b', '#c8aa9e', '#b6c2a2', '#ddc19b', '#98ab88', '#d8a888'],
   },
-  {
-    id: 'noche',
-    name: 'Noche',
-    colors: ['#262b35', '#333a47', '#414a5a', '#2d333e', '#4a5366', '#383f4d', '#222730', '#444d5e'],
-  },
 ]
 
 export function getPalette(id: string): Palette {

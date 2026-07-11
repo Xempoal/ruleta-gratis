@@ -18,8 +18,8 @@ const DEFAULT_ENTRIES: Entry[] = [
 
 const DEFAULT_SETTINGS: Settings = {
   title: '',
-  templateId: 'B',
-  paletteId: 'vivo',
+  templateId: 'F',
+  paletteId: 'candy',
   customColors: null,
   numWinners: 1,
   removeWinners: false,

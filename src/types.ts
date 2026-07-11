@@ -32,7 +32,7 @@ export interface Settings {
   logo: string | null
 }
 
-export const MAX_ENTRIES = 100
+export const MAX_ENTRIES = 500
 export const MAX_WINNERS = 10
 
 export function uid(): string {
