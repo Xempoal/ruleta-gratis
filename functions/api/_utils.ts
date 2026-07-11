@@ -23,7 +23,7 @@ export interface Env {
 }
 
 // ── Reglas del producto ──────────────────────────────────────────────────
-export const TTL_HOURS = 48 // todo sorteo se borra a las 48 h
+export const TTL_HOURS = 24 // todo sorteo se borra a las 24 h
 export const MAX_PARTICIPANTS = 500
 export const DAILY_RAFFLE_CAP = 40 // sorteos nuevos por día (global)
 export const CREATE_PER_IP_DAY = 5 // sorteos nuevos por IP por día
@@ -178,7 +178,7 @@ export function ensureSchema(db: D1Database): Promise<void> {
   return schemaReady
 }
 
-/** Borra sorteos caducados (48 h) y contadores de rate-limit viejos. */
+/** Borra sorteos caducados (24 h) y contadores de rate-limit viejos. */
 export async function cleanupExpired(db: D1Database): Promise<void> {
   const t = now()
   await db.batch([

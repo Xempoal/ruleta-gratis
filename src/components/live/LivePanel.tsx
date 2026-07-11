@@ -166,7 +166,7 @@ function CreateView({ onCreated }: { onCreated: (a: AdminRaffle) => void }) {
           Cancelar
         </button>
       </div>
-      <small className="hint">Los datos del sorteo se borran solos a las 48 horas.</small>
+      <small className="hint">Los datos del sorteo se borran solos a las 24 horas.</small>
     </form>
   )
 }
@@ -203,7 +203,7 @@ function AdminView({
       setError(null)
     } catch (e) {
       const msg = (e as Error).message
-      // El sorteo caducó (48 h) o fue borrado desde otro dispositivo
+      // El sorteo caducó (24 h) o fue borrado desde otro dispositivo
       if (msg.includes('no existe')) {
         clearAdminRaffle()
         setAdmin(null)
@@ -275,7 +275,7 @@ function AdminView({
     try {
       await deleteRaffle(admin.slug, admin.token)
     } catch {
-      /* si falla igual lo soltamos localmente; caduca solo a las 48 h */
+      /* si falla igual lo soltamos localmente; caduca solo a las 24 h */
     }
     clearAdminRaffle()
     setAdmin(null)
@@ -357,7 +357,7 @@ function AdminView({
         </button>
       </div>
       <small className="hint">
-        El sorteo y sus datos se borran solos a las 48 horas, o al concluirlo.
+        El sorteo y sus datos se borran solos a las 24 horas, o al concluirlo.
       </small>
     </div>
   )
